@@ -1,3 +1,3 @@
-pub fn testing() {
-    println!("test");
+pub fn testing(s: &mut String) {
+    println!("{}", s);
 }
