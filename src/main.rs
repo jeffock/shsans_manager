@@ -1,3 +1,5 @@
+mod datamanip;
+
 fn main() {
-    println!("Hello, world!");
+    datamanip::testing();
 }
