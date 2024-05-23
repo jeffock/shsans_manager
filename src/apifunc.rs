@@ -3,13 +3,13 @@ use serde_json::Value;
 use crate::paperstruct::Paper;
 
 pub async fn fetch_paper(doi: &str) -> Result<Paper, Box<dyn std::error::Error>> {
-    let url = format!("https://api.crossref.org/works/{}", doi);
+    let url = format!("https://api.semanticscholar.org/v1/paper/{}", doi);
     let response = reqwest::get(&url).await?;
 
     if response.status().is_success() {
         let json: Value = response.json().await?;
-        let title = json["message"]["title"][0].as_str().unwrap_or("").to_string();
-        let keywords: Vec<String> = json["message"]["subject"]
+        let title = json["title"].as_str().unwrap_or("").to_string();
+        let keywords: Vec<String> = json["keywords"]
             .as_array()
             .unwrap_or(&vec![])
             .iter()
